@@ -72,7 +72,8 @@ $(document).ready(function(){//once page loads trigger this function
       $("#overlay").fadeIn(300);
       return;
     }
-
+    /*if conditional for the snake getting larger as it eats the food
+    it pops another tail peice to the array*/
     if(nx == food.x && ny == food.y){
       var tail = {x: nx,y: ny};
       score++;
@@ -84,7 +85,9 @@ $(document).ready(function(){//once page loads trigger this function
     }
 
     snake_array.unshift(tail);
-
+    
+    /*loop for the snake to be able to get bigger as it eats the food*/
+    
     for(var i = 0; i < snake_array.length;i++){
       var c = snake_array[i];
       paint_cell(c.x,c.y);
@@ -98,13 +101,18 @@ $(document).ready(function(){//once page loads trigger this function
 
     $(".score").html("Your Score: " + score);
   }
-
+  
+/*canvas methods for coloring blocks on the canvas
+this is the function that creates the snake */
+  
   function paint_cell(x,y){
     ctx.fillStyle= "orange";
     ctx.fillRect(x*cw, y*cw,cw,cw);
     ctx.strokeStyle="white";
     ctx.strokeRect(x*cw, y*cw,cw,cw);
   }
+  
+  //check collision function
 
   function check_collision(x, y, array){
     for(i = 0; i < array.length; i++){
@@ -116,6 +124,8 @@ $(document).ready(function(){//once page loads trigger this function
   }
 
   //keyboard controller
+  /*the controller is the arrow keys conditional for the direction the snake is going to move when 
+  these keys are press*/
 
   $(document).keydown(function(e){
     var key = e.which;
